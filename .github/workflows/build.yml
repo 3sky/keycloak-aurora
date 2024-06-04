@@ -30,10 +30,10 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: 3sky/keycloak-aurora:${GITHUB_REF:10}
+          tags: 3sky/keycloak-aurora:{{ github.ref_name }}
           build-args: |
             BUILD_DATE:${{ github.event.repository.updated_at }}
-            VERSION:${GITHUB_REF:10}
+            VERSION:{{ github.ref_name }}
             JDBC_VERSION:2.3.6
 
 
@@ -43,9 +43,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action
+        uses: aquasecurity/trivy-action@0.20.0
         with:
-          image-ref: quay.io/3sky/keycloak-aurora:${GITHUB_REF:10}
+          image-ref: quay.io/3sky/keycloak-aurora:{{ github.ref_name }}
           format: sarif
           output: trivy-results.sarif
           severity: MEDIUM,CRITICAL,HIGH
