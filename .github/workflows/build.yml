@@ -43,7 +43,7 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.20.0
         with:
-          image-ref: quay.io/3sky/keycloak-aurora:{{ github.ref_name }}
+          image-ref: quay.io/3sky/keycloak-aurora:${{ github.ref_name }}
           format: sarif
           output: trivy-results.sarif
           severity: MEDIUM,CRITICAL,HIGH
