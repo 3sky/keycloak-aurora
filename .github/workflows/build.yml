@@ -26,6 +26,11 @@ jobs:
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_ROBOT_TOKEN }}
 
+      - name: debug
+        run: |
+          echo "DATE: ${{ github.event.repository.updated_at }}"
+          echo "VERSION: ${{ github.ref_name }}"
+
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
@@ -33,7 +38,7 @@ jobs:
           tags: 3sky/keycloak-aurora:${{ github.ref_name }}
           build-args: |
             BUILD_DATE=${{ github.event.repository.updated_at }}
-            VERSION={{ github.ref_name }}
+            VERSION=${{ github.ref_name }}
             JDBC_VERSION=2.3.6
 
 
