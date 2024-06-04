@@ -1,4 +1,4 @@
-name: Build the tag
+name: Build and scan
 
 on:
   push:
@@ -32,6 +32,10 @@ jobs:
         with:
           push: true
           tags: 3sky/keycloak-aurora:${GITHUB_REF:10}
+          build-args: |
+            BUILD_DATE:${{ github.event.repository.updated_at }}
+            VERSION:${GITHUB_REF:10}
+            JDBC_VERSION:2.3.6
 
 
   analysis:
