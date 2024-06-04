@@ -34,8 +34,6 @@ jobs:
           build-args: |
             BUILD_DATE=${{ github.event.repository.updated_at }}
             VERSION=${{ github.ref_name }}
-            JDBC_VERSION=2.3.6
-
 
   analysis:
     needs: build-push
