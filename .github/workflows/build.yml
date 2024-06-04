@@ -3,8 +3,7 @@ name: Build and scan
 on:
   push:
     tags:
-      - 'v'
-      - 'latest'
+      - '*'
 
 defaults:
   run:
