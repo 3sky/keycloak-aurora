@@ -20,7 +20,8 @@ WORKDIR /opt/keycloak
 # use ALB on top, self-sign is fine here
 RUN keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysize 2048 -dname "CN=server" -alias server -ext "SAN:c=DNS:localhost,IP:127.0.0.1" -keystore conf/server.keystore
 RUN /opt/keycloak/bin/kc.sh build
-ADD --chmod=0666 https://github.com/awslabs/aws-advanced-jdbc-wrapper/releases/download/$JDBC_VERSION/aws-advanced-jdbc-wrapper-$JDBC_VERSION.jar /opt/keycloak/providers/aws-advanced-jdbc-wrapper.jar
+RUN curl -L -o /opt/keycloak/providers/aws-advanced-jdbc-wrapper.jar https://github.com/awslabs/aws-advanced-jdbc-wrapper/releases/download/${JDBC_VERSION}/aws-advanced-jdbc-wrapper-${JDBC_VERSION}.jar && \
+	chmod 0666 /opt/keycloak/providers/aws-advanced-jdbc-wrapper.jar
 
 FROM quay.io/keycloak/keycloak:${VERSION}
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
