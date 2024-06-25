@@ -13,6 +13,7 @@ LABEL vendor="3sky.dev" \
 ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
 ENV KC_DB=postgres
+ENV KC_DB_DRIVER=software.amazon.jdbc.Driver
 
 WORKDIR /opt/keycloak
 # use ALB on top, self-sign is fine here
