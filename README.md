@@ -11,9 +11,7 @@ Current version of AWS Advanced JDBC wrapper is [2.3.6](https://github.com/aws/a
 
 ## Storage
 
-Images as well as build process are hosted on [quay.io](quay.io).
-
-[![Docker Repository on Quay](https://quay.io/repository/3sky/keycloak-aurora/status "Docker Repository on Quay")](https://quay.io/repository/3sky/keycloak-aurora)
+Images are are hosted on [quay.io](quay.io).
 
 ## Pulling
 
