@@ -1,4 +1,4 @@
-ARG VERSION=25.0.1
+ARG VERSION=25.0.2
 ARG BUILD_DATE=today
 
 FROM quay.io/keycloak/keycloak:${VERSION} as builder
