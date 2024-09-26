@@ -7,7 +7,7 @@ Build based on documentation, which can be found here:
 1. [Preparing for Amazon Aurora PostgreSQL](https://www.keycloak.org/server/db#preparing-keycloak-for-amazon-aurora-postgresql)
 2. [Running Keycloak in a container](https://www.keycloak.org/server/containers)
 
-Current version of AWS Advanced JDBC wrapper is [2.3.6](https://github.com/aws/aws-advanced-jdbc-wrapper/releases).
+Current version of AWS Advanced JDBC wrapper is [2.4.0](https://github.com/aws/aws-advanced-jdbc-wrapper/releases).
 
 ## Storage
 
