@@ -1,5 +1,4 @@
 ARG VERSION=25.0.6
-ARG BUILD_DATE=today
 ARG WRAPPER_VERSION=2.4.0
 
 FROM quay.io/keycloak/keycloak:${VERSION} as builder
@@ -7,8 +6,7 @@ FROM quay.io/keycloak/keycloak:${VERSION} as builder
 LABEL vendor="3sky.dev" \
 	maintainer="Kuba Wolynko <kuba@3sky.dev>" \
 	name="Keyclock for Aurora usage" \
-	arch="x86" \
-	build-date=${BUILD_DATE}
+	arch="x86" 
 
 # Enable health and metrics support
 ENV KC_HEALTH_ENABLED=true
@@ -28,7 +26,9 @@ RUN keytool -genkeypair \
 	-ext "SAN:c=DNS:localhost,IP:127.0.0.1" \
 	-keystore conf/server.keystore
 
-ADD --chmod=0666 https://github.com/awslabs/aws-advanced-jdbc-wrapper/releases/download/${WRAPPER_VERSION}/aws-advanced-jdbc-wrapper-${WRAPPER_VERSION}.jar /opt/keycloak/providers/aws-advanced-jdbc-wrapper.jar
+RUN curl -L https://github.com/awslabs/aws-advanced-jdbc-wrapper/releases/download/${WRAPPER_VERSION}/aws-advanced-jdbc-wrapper-${WRAPPER_VERSION}.jar -o /opt/keycloak/providers/aws-advanced-jdbc-wrapper.jar \
+	&& chmod 0666 /opt/keycloak/providers/aws-advanced-jdbc-wrapper.jar
+
 RUN /opt/keycloak/bin/kc.sh build
 
 FROM quay.io/keycloak/keycloak:${VERSION}
