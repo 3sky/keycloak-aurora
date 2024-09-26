@@ -1,5 +1,4 @@
 ARG VERSION=25.0.6
-ARG WRAPPER_VERSION=2.4.0
 
 FROM quay.io/keycloak/keycloak:${VERSION} as builder
 
@@ -26,9 +25,8 @@ RUN keytool -genkeypair \
 	-ext "SAN:c=DNS:localhost,IP:127.0.0.1" \
 	-keystore conf/server.keystore
 
-RUN curl -L https://github.com/awslabs/aws-advanced-jdbc-wrapper/releases/download/${WRAPPER_VERSION}/aws-advanced-jdbc-wrapper-${WRAPPER_VERSION}.jar -o /opt/keycloak/providers/aws-advanced-jdbc-wrapper.jar \
-	&& chmod 0666 /opt/keycloak/providers/aws-advanced-jdbc-wrapper.jar
 
+ADD --chmod=0666 https://github.com/awslabs/aws-advanced-jdbc-wrapper/releases/download/2.4.0/aws-advanced-jdbc-wrapper-2.4.0.jar /opt/keycloak/providers/aws-advanced-jdbc-wrapper.jar
 RUN /opt/keycloak/bin/kc.sh build
 
 FROM quay.io/keycloak/keycloak:${VERSION}
